@@ -16,15 +16,24 @@ case "$1" in
 start)
 $DAEMON start
 touch $LOCK
+sleep 3
+ip addr add 192.168.19.2/24 dev vpn_vpn
 ;;
 stop)
+ip addr del 192.168.19.2/24 dev vpn_vpn
 $DAEMON stop
 rm $LOCK
 ;;
 restart)
+ip addr del 192.168.19.2/24 dev vpn_vpn
 $DAEMON stop
 sleep 3
 $DAEMON start
+sleep 3
+ip addr add 192.168.19.2/24 dev vpn_vpn
+;;
+status)
+/usr/local/softether-vpnclient/vpncmd localhost /client /cmd accountstatusget alma.sb.sace.ro
 ;;
 *)
 echo "Usage: $0 {start|stop|restart}"
