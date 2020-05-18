@@ -1,0 +1,33 @@
+#!/bin/sh
+# description: SoftEther VPN Client
+### BEGIN INIT INFO
+# Provides:          vpnclient
+# Required-Start:    $local_fs $network
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: softether vpnclient
+# Description:       softether vpnclient daemon
+### END INIT INFO
+DAEMON=/usr/local/softether-vpn-client/vpnclient
+LOCK=/var/lock/subsys/vpnclient
+test -x $DAEMON || exit 0
+case "$1" in
+start)
+$DAEMON start
+touch $LOCK
+;;
+stop)
+$DAEMON stop
+rm $LOCK
+;;
+restart)
+$DAEMON stop
+sleep 3
+$DAEMON start
+;;
+*)
+echo "Usage: $0 {start|stop|restart}"
+exit 1
+esac
+exit 0
