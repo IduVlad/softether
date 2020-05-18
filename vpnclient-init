@@ -33,7 +33,7 @@ sleep 3
 ip addr add 192.168.19.2/24 dev vpn_vpn
 ;;
 status)
-/usr/local/softether-vpnclient/vpncmd localhost /client /cmd accountstatusget alma.sb.sace.ro
+/usr/local/softether-vpn-client/vpncmd localhost /client /cmd accountstatusget alma.sb.sace.ro
 ;;
 *)
 echo "Usage: $0 {start|stop|restart}"
